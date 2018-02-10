@@ -1,0 +1,6 @@
+sudo nano /etc/apache2/sites-enabled/001-cloud9.conf
+
+mysql-ctl cli
+use c9;
+select @@hostname;
+exit

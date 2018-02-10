@@ -1,0 +1,19 @@
+{
+    "name": "gstankov/numerate",
+    "description": "Use packages with minimal code.",
+    "type": "project",
+    "require": {
+        "setasign/fpdf": "^1.8",
+        "setasign/fpdi": "^1.6",
+        "verot/class.upload.php": "dev-master",
+        "rev42/tfpdf": "dev-master",
+        "gabrielelana/byte-units": "dev-master",
+        "aferrandini/phpqrcode": "dev-master",
+        "slim/slim": "^3.0",
+        "slim/php-view": "dev-master",
+        "zurb/foundation": "dev-master",
+        "components/jquery": "dev-master"
+    },
+    "license": "free",
+    "minimum-stability": "dev"
+}
