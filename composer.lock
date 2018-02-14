@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e9665795e2d3afc37ca1410e0afd8bd",
+    "content-hash": "b4db9e7aa9e52aeabe9dcb43b9ad9332",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -216,6 +216,44 @@
                 "routing"
             ],
             "time": "2017-01-19T11:35:12+00:00"
+        },
+        {
+            "name": "org_heigl/ghostscript",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heiglandreas/Org_Heigl_Ghostscript.git",
+                "reference": "b286cca4e17f3da6053aeda4488b93a5be257f06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Ghostscript/zipball/b286cca4e17f3da6053aeda4488b93a5be257f06",
+                "reference": "b286cca4e17f3da6053aeda4488b93a5be257f06",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.1",
+                "phpdocumentor/phpdocumentor": "^2.9",
+                "phpunit/phpunit": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Org_Heigl\\Ghostscript\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Heigl",
+                    "email": "andreas@heigl.org"
+                }
+            ],
+            "description": "A PHP-Wrapper around the Ghostscript-CLI",
+            "time": "2017-10-18T04:56:34+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -703,7 +741,8 @@
         "aferrandini/phpqrcode": 20,
         "slim/php-view": 20,
         "zurb/foundation": 20,
-        "components/jquery": 20
+        "components/jquery": 20,
+        "org_heigl/ghostscript": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

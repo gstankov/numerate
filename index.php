@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+// Script execution time
+set_time_limit(300);
+
+use Slim\Views\PhpRenderer;
+
 /**
  * Step 1: Require the Slim Framework using Composer's autoloader
  *
@@ -7,6 +14,26 @@
  * PSR-4 autoloader.
  */
 require 'vendor/autoload.php';
+
+// Lib
+
+// Clean data
+require 'app/lib/clean_data.php';
+// Upload CSV and PDF
+require 'app/lib/csv_pdf_upload.php';
+// Convert PDF to jpg
+require 'app/lib/pdf_to_jpg.php';
+// Convert CSV to array
+//require 'app/lib/csv_to_array.php';
+// Convert CSV to PDF
+//require 'app/lib/csv_to_pdf.php';
+
+// Slim config
+$config = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
 
 /**
  * Step 2: Instantiate a Slim application
@@ -16,7 +43,8 @@ require 'vendor/autoload.php';
  * your Slim application now by passing an associative array
  * of setting names and values into the application constructor.
  */
-$app = new Slim\App();
+$app = new Slim\App($config);
+
 
 /**
  * Step 2.1: PHP renderer
@@ -25,12 +53,17 @@ $app = new Slim\App();
  * 
  * 
  */
+// PHP renderer
+
+// Get container
 $container = $app->getContainer();
 
 // Register component on container
 $container['view'] = function ($container) {
-    return new \Slim\Views\PhpRenderer('app/templates/');
+    return new PhpRenderer('app/templates/');
 };
+
+/* ================================================================================= */
 
 /**
  * Step 3: Define the Slim application routes
