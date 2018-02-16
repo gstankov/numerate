@@ -23,7 +23,7 @@ function pdf_to_jpg($user_files) {
 			// Set the output file that will be created in the same directory as the input
 			->setOutputFile($user_file['file_dst_name_body'])
 			// Set the resolution to 96 pixel per inch
-			->setResolution(600)
+			->setResolution(72)
 			// Set Text-antialiasing to the highest level
 			->setTextAntiAliasing(Ghostscript::ANTIALIASING_HIGH)
 			// Set the jpeg-quality to 100 (This is device-dependent!)

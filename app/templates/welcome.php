@@ -1,6 +1,6 @@
 <?php require "partials/header.php"; ?>
 
-<div class="wrapper">
+<div class="wrapper wrapper-welcome">
     
     <div class="branding">
         <img src="app/assets/images/icon-case.png">

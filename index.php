@@ -1,10 +1,9 @@
 <?php
 
 session_start();
-
-// Script execution time
 set_time_limit(300);
 
+use Slim\App;
 use Slim\Views\PhpRenderer;
 
 /**
@@ -13,20 +12,7 @@ use Slim\Views\PhpRenderer;
  * If you are not using Composer, you need to load Slim Framework with your own
  * PSR-4 autoloader.
  */
-require 'vendor/autoload.php';
-
-// Lib
-
-// Clean data
-require 'app/lib/clean_data.php';
-// Upload CSV and PDF
-require 'app/lib/csv_pdf_upload.php';
-// Convert PDF to jpg
-require 'app/lib/pdf_to_jpg.php';
-// Convert CSV to array
-//require 'app/lib/csv_to_array.php';
-// Convert CSV to PDF
-//require 'app/lib/csv_to_pdf.php';
+require __DIR__ . '/vendor/autoload.php';
 
 // Slim config
 $config = [
@@ -45,25 +31,21 @@ $config = [
  */
 $app = new Slim\App($config);
 
+/* ================================================================================= */
 
 /**
- * Step 2.1: PHP renderer
+ * Step 2.1:
  * 
- * Needs to be her to use plain php in templates
+ * PHP view renderer
  * 
  * 
  */
-// PHP renderer
-
-// Get container
 $container = $app->getContainer();
 
 // Register component on container
 $container['view'] = function ($container) {
     return new PhpRenderer('app/templates/');
 };
-
-/* ================================================================================= */
 
 /**
  * Step 3: Define the Slim application routes
@@ -73,7 +55,64 @@ $container['view'] = function ($container) {
  * argument for `Slim::get`, `Slim::post`, `Slim::put`, `Slim::patch`, and `Slim::delete`
  * is an anonymous function.
  */
-require 'app/routes.php';
+$app->get('/', function ($request, $response) {
+    
+    // Return welcome
+    return $this->view->render($response, 'welcome.php');
+    
+});
+
+$app->post('/editor', function ($request, $response) {
+    
+    // App\Lib
+    
+    // Upload CSV and PDF
+    require 'app/lib/csv_pdf_upload.php';
+    // Convert PDF to jpg
+    require 'app/lib/pdf_to_jpg.php';
+    // Convert CSV to array
+    require 'app/lib/csv_to_array.php';
+    // Convert CSV to PDF
+    require 'app/lib/csv_to_pdf.php';
+    // Clean data
+    require 'app/lib/clean_data.php';
+    
+    // Upload files
+    $files = csv_pdf_upload();
+    
+    // If error uploading
+    if (isset($files['error'])) {
+        
+        // Set session error
+        $_SESSION['error'] = $files['error'];
+        
+        // Redirect to welcome
+        return $response->withRedirect('/');
+    
+    } else { // No errors
+    
+        // PDF jpg preview create
+        $files = pdf_to_jpg($files);
+        
+        // Unset upload errors
+        session_unset($_SESSION['error']);
+        
+        // Set session error
+        $_SESSION['success'] = true;
+        
+        // Do not cache this response
+        $response = $response->withHeader("Cache-control", "no-store, no-cache, must-revalidate");
+        
+        // View data
+        $data['files'] = $files;
+        
+        // Return view
+        return $this->view->render($response, 'editor.php', $data);
+    
+    }
+    
+});
+
 
 /**
  * Step 4: Run the Slim application

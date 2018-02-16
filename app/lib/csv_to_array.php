@@ -7,7 +7,7 @@
  *
  * Based on code by fab at tradermail dot info at http://php.net/manual/en/function.str-getcsv.php#119666
  */
-function csv_to_array($csv, $delimiter=';', $header_line=false) {
+function csv_to_array($csv, $delimiter=',', $header_line=false) {
 
     // CSV from external sources may have Unix or DOS line endings. str_getcsv()
     // requires that the "delimiter" be one character only, so we don't want
