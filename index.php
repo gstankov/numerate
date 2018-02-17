@@ -57,13 +57,16 @@ $container['view'] = function ($container) {
  */
 $app->get('/', function ($request, $response) {
     
+    // Unset upload errors
+    session_unset($_SESSION['error']);
+    
     // Return welcome
     return $this->view->render($response, 'welcome.php');
     
 });
 
 $app->post('/editor', function ($request, $response) {
-    
+
     // App\Lib
     
     // Upload CSV and PDF
@@ -93,9 +96,6 @@ $app->post('/editor', function ($request, $response) {
     
         // PDF jpg preview create
         $files = pdf_to_jpg($files);
-        
-        // Unset upload errors
-        session_unset($_SESSION['error']);
         
         // Set session error
         $_SESSION['success'] = true;

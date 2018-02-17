@@ -3,7 +3,7 @@
 <div class="wrapper wrapper-welcome">
     
     <div class="branding">
-        <img src="app/assets/images/icon-case.png">
+        <a href="/"><img src="app/assets/images/icon-case.png"></a>
     </div>
 
     <?php if (isset($_SESSION['error'])) { ?>
@@ -21,7 +21,7 @@
         <div class="callout secondary">
             <h5>Welcome!</h5>
             <p>Stamp a Barcode, QR code or text over PDF document based on CSV data.</p>
-            Step 1: Upload files...
+            Step 1: Upload files or press "Sample" button to load sample files.
         </div>
     
     <?php } ?>
@@ -34,12 +34,12 @@
         </label>
         
         <label>
-            <h5>Select CSV file</h5>
-            <input class="button" type="file" name="files[]" />
+            <h5>Select CSV files</h5>
+            <input class="button" type="file" name="files[]" multiple />
         </label>
         
         <label>
-            <input class="button" type="submit" name="submit" value="Upload" />
+            <input class="button" type="submit" name="submit" value="Upload" /> or <a href="/sample" class="button" />Sample</a>
         </label>
         
     </form>

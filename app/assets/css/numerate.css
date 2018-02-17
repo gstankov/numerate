@@ -1,0 +1,61 @@
+body {
+    padding:10px;
+    background: url('../images/bckg.jpg');
+}
+
+/* ----------------------------------------- */
+
+.wrapper {
+    margin: 0px auto;
+    text-align: center;
+}
+
+.wrapper-welcome {
+    width: 720px;
+}
+
+/* ----------------------------------------- */
+
+.float-left {
+   float: left;
+}
+
+.info {
+    font-size: 10px;
+}
+
+.success-icon {
+    vertical-align: text-bottom;
+}
+
+/* ----------------------------------------- */
+
+.pdf-preview {
+    text-align: center;
+}
+
+.img-wrapper-background {
+    margin: 0px auto;
+    box-shadow: 0px 0px 10px #CCC;
+}
+
+.img-top {
+    position: absolute;
+    margin-top: -15px;
+    height: 10px;
+    background-color: #FFF;
+    background-image: url('/app/assets/images/ruler-top.png');
+}
+.img-left {
+    position: absolute;
+    margin-left: -15px;
+    width: 10px;
+    background-color: #FFF;
+    background-image: url('/app/assets/images/ruler-left.png');
+}
+
+/* ----------------------------------------- */
+
+.csv-data {
+    margin:0px auto;
+}

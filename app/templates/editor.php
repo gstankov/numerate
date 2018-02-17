@@ -1,85 +1,134 @@
-<?php require "partials/header.php"; ?>
+<?php
 
-<div class="wrapper">
+// Header
+require "partials/header.php";
+
+// Uploaded
+if (isset($_SESSION['success'])) {
     
-<?php if (isset($_SESSION['success'])) { ?>
-
-    <div class="callout success">
-
-        <?php
-
-            $out = "<p>";
-
-                foreach ($data['files'] as $file) {
-                    
-                   $out.= '<img class="success-icon" src="app/assets/images/success.png" /> ' . $file['file_dst_name'] . ", ";
-                   
-                }
+    // Wrapper div
+    $out = '<div class="wrapper">';
     
-                $out.= "uploaded successfully.";
-            
-            $out.= "</p>";
-
-            echo $out;
-            
-        ?>
-
-    </div>
-    
-    <?php
-
-        $out = "<h4>PDF preview</h4>";
+        // Uploaded message    
+        $out.= '<div class="callout success">';
         
-        $csv = [];
+            $out.='<div class="float-left">';
+                $out.='<a href="/"><img src="app/assets/images/icon-case.png" width="60px" /></a>';
+            $out.='</div>';
         
-        foreach ($data['files'] as $file) {
-            
-            if ($file['file_type'] == 'application/pdf') {
-                
-                $out.= "<div class='pdf-preview'>";
-                    $out.= '<img src="app/data/' . $file['file_jpg_preview'] . '" />';
-                $out.= '</div>';
-                
-            } else {
-                
-                $handle = file_get_contents($file['file_dst_pathname']);
-                
-                $csv[] = csv_to_array($handle);
-            
+            foreach ($data['files'] as $file) {
+                $out.='<img class="success-icon" src="app/assets/images/success.png" /> ' . $file['file_dst_name'] . ", ";
             }
             
-        }
+            $out.= "uploaded successfully.";
+            
+            $out.= '<h4>Step two: Place elements on uploaded PDF template.</h4>';
+            
+        $out.= '</div>';
+
+        // CSV files as sheets
+        $sheets = [];
         
-        $out.= "<h4>CSV data</h4>";
+        // EACH FILE
+        foreach ($data['files'] as $file) {
         
-        $out.= "<div class='csv-data'>";
-    
-            $out.="<table>";
-        
-                foreach ($csv as $sheet) {
+            // If PDF document
+            if ($file['file_type'] == 'application/pdf') {
+                
+                $out.= "<h4>PDF preview</h4></br>";
+                
+                // PDF PREVIEW
+                $out.= '<div class="pdf-preview">';
+                
+                    $out.= '<div class="img-wrapper">';
                     
-                    foreach ($sheet as $row) {
-                        $out.="<tr>";
-                            $out.= '<td>' . $row[0] . '</td>';
-                        $out.= "</tr>";
+                        $out.= '<div class="img-wrapper-background">';
+                        
+                            $out.='<div class="img-top"></div>';
+                            $out.='<div class="img-left"></div>';
+                            
+                            $out.= '<img src="app/data/' . $file['file_jpg_preview'] . '" />';
+                        
+                        $out.= '</div>';
+                    
+                    $out.= '</div>';
+                    
+                $out.= '</div>';
+                
+            } else { // If CSV file
+                
+                // CSV PREVIEW
+                $handle = file_get_contents($file['file_dst_pathname']);
+                
+                $sheets[] = [
+                    'file_dst_name' => $file['file_dst_name'],
+                    'rows' => csv_to_array($handle)
+                ];
+                    
+            } // each file as sheet
+            
+        } // foreach $data['files'] as $file
+        
+        $out.= '<h4>CSV data</h4>';
+
+        $out.= '<div class="csv-data">';
+            
+            // Files as sheets
+            foreach($sheets as $sheet) {
+                
+                $out.='<h5 align="left">File: ' . $sheet['file_dst_name'] . '</h5>';
+                
+                $out.='<table class="stack">';
+                
+                    $i = 0;
+                    
+                    foreach ($sheet['rows'] as $row) {
+                        
+                        // If first row, it's header
+                        if ($i == 0) {
+                                
+                            $out.='<thead>';
+                            
+                                $out.='<tr>';
+                                    foreach ($row as $column) {
+                                        $out.= '<th>' . $column . '</th>';
+                                    }
+                                $out.= '</tr>';
+                                
+                            $out.='</thead>';
+                            
+                            // Table rows
+                            $out.='<tbody>';
+                            
+                        } else {
+                            
+                            $out.='<tr>';
+                                foreach ($row as $column) {
+                                    $out.= '<td align="left">' . $column . '</td>';
+                                }
+                            $out.= '</tr>';
+                                
+                        }
+                        
+                        $i++;
+                    
                     }
                     
-                    $out.= "</tr>";
-    
-                }
+                    $out.='</tbody>';
+                    
+                $out.= '</table>';
+        
+            } // each $sheets as $sheet
+
+            $out.= '<a href="/" class="button">Upload again</a>';
+        
+        $out.= '</div>'; // /.csv-data
                 
-            $out.= "</table>";
-        
-        $out.= '</div>';
-        
-        echo $out;
-        
-    ?>
-
-    <a href="/" class="button">Upload again</a>
+    $out.= '</div>'; // /-wrapper
     
-<?php } ?>
+    echo $out;
+                
+}
 
-</div>
-
-<?php require "partials/footer.php"; ?>
+// Footer
+require "partials/footer.php";
