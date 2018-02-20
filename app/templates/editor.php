@@ -120,7 +120,8 @@ if (isset($_SESSION['success'])) {
         
             } // each $sheets as $sheet
 
-            $out.= '<a href="/" class="button">Upload again</a>';
+            $out.= '<a href="/" class="button">Upload again</a> | ';
+            $out.= '<a href="/generate" class="button">Generate</a>';
         
         $out.= '</div>'; // /.csv-data
                 

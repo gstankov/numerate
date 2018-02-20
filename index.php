@@ -5,6 +5,7 @@ set_time_limit(300);
 
 use Slim\App;
 use Slim\Views\PhpRenderer;
+use Setasign\FPDI;
 
 /**
  * Step 1: Require the Slim Framework using Composer's autoloader
@@ -60,8 +61,31 @@ $app->get('/', function ($request, $response) {
     // Unset upload errors
     session_unset($_SESSION['error']);
     
-    // Return welcome
+    // Return view
     return $this->view->render($response, 'welcome.php');
+    
+});
+ 
+$app->get('/sample', function ($request, $response) {
+    
+    // Unset upload errors
+    session_unset($_SESSION['error']);
+    
+    // Convert CSV to PDF
+    require 'app/lib/csv_to_pdf.php';
+    // Convert CSV to array
+    require 'app/lib/csv_to_array.php';
+    
+    // CSV
+    $handle = file_get_contents('app/assets/samples/Sample_CSV.csv');
+    
+    $csv = csv_to_array($handle);
+    
+    $pdf = csv_to_pdf('app/assets/samples/Sample_PDF.pdf', $csv);
+    
+    $response = $response->withHeader('Content-type', 'application/pdf');
+	
+	return $response->write();
     
 });
 
@@ -73,12 +97,6 @@ $app->post('/editor', function ($request, $response) {
     require 'app/lib/csv_pdf_upload.php';
     // Convert PDF to jpg
     require 'app/lib/pdf_to_jpg.php';
-    // Convert CSV to array
-    require 'app/lib/csv_to_array.php';
-    // Convert CSV to PDF
-    require 'app/lib/csv_to_pdf.php';
-    // Clean data
-    require 'app/lib/clean_data.php';
     
     // Upload files
     $files = csv_pdf_upload();
