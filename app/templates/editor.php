@@ -56,6 +56,9 @@ if (isset($_SESSION['success'])) {
                 $out.= '</div>';
                 
             } else { // If CSV file
+            
+                // Convert CSV to array
+                require 'app/lib/csv_to_array.php';
                 
                 // CSV PREVIEW
                 $handle = file_get_contents($file['file_dst_pathname']);
