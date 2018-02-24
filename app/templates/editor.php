@@ -15,11 +15,11 @@ if (isset($_SESSION['success'])) {
         $out.= '<div class="callout success">';
         
             $out.='<div class="float-left">';
-                $out.='<a href="/"><img src="app/assets/images/icon-case.png" width="60px" /></br>Home</a>';
+                $out.='<a href="/"><img src="app/assets/images/icon-case-upload.png" width="60px" /></br>Upload</a>';
             $out.='</div>';
             
             $out.='<div class="float-right">';
-                $out.='<a href="/generate"><img src="app/assets/images/icon-case.png" width="60px" /></br>Generate</a>';
+                $out.='<a href="/generate"><img src="app/assets/images/icon-generate.png" width="60px" /></br>Generate</a>';
             $out.='</div>';
 
             foreach ($data['files'] as $file) {
