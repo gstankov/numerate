@@ -11,5 +11,8 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "merge-stream": "^1.0.1"
+  },
+  "dependencies": {
+    "imagesloaded": "^4.1.4"
   }
 }

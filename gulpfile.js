@@ -13,7 +13,10 @@ gulp.task('default', function() {
     
     var zurbCss = gulp.src('vendor/zurb/foundation/dist/css/*')
         .pipe(gulp.dest('app/assets/css/zurb'));
+        
+    var imagesLoaded = gulp.src('node_modules/imagesloaded/imagesloaded.pkgd.min.js')
+        .pipe(gulp.dest('app/assets/js/imagesLoaded'));
     
-    return merge(jquery, zurbJs, zurbCss);
+    return merge(jquery, zurbJs, zurbCss, imagesLoaded);
   
 });

@@ -34,13 +34,28 @@ body {
 
 /* ----------------------------------------- */
 
+.menu-left {
+    width:200px;
+    text-align: left;
+}
+
+.menu-right {
+    width:200px;
+    text-align: right;
+    word-wrap:break-word;
+}
+
 .pdf-preview {
+    display:none;
+    padding-top: 40px;
+    padding-left: 210px;
+    padding-right: 210px;
     text-align: center;
 }
 
 .img-wrapper-background {
     margin: 0px auto;
-    box-shadow: 0px 0px 10px #CCC;
+    box-shadow: 0px 0px 20px #CCC;
 }
 
 .img-top {
@@ -61,5 +76,5 @@ body {
 /* ----------------------------------------- */
 
 .csv-data {
-    margin:0px auto;
+    margin: 0px auto;
 }

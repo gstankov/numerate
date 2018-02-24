@@ -14,7 +14,7 @@ class CsvToArray
     
     private $csv;
  
-    public function __construct($csv, $delimiter=',', $header_line=false) {
+    public function __construct($csv, $delimiter=';', $header_line=false) {
 
         // CSV from external sources may have Unix or DOS line endings. str_getcsv()
         // requires that the "delimiter" be one character only, so we don't want
