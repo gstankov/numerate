@@ -30,12 +30,12 @@
         
         <label>
             <h5>Select PDF file</h5>
-            <input class="button" type="file" name="files[]" />
+            <input class="button" type="file" name="user_files[]" />
         </label>
         
         <label>
             <h5>Select CSV files</h5>
-            <input class="button" type="file" name="files[]" multiple />
+            <input class="button" type="file" name="user_files[]" multiple />
         </label>
         
         <label>

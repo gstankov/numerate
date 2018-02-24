@@ -1,5 +1,7 @@
 <?php
 
+use Numerate\lib;
+
 // Header
 require "partials/header.php";
 
@@ -13,11 +15,15 @@ if (isset($_SESSION['success'])) {
         $out.= '<div class="callout success">';
         
             $out.='<div class="float-left">';
-                $out.='<a href="/"><img src="app/assets/images/icon-case.png" width="60px" /></a>';
+                $out.='<a href="/"><img src="app/assets/images/icon-case.png" width="60px" /></br>Home</a>';
             $out.='</div>';
-        
+            
+            $out.='<div class="float-right">';
+                $out.='<a href="/generate"><img src="app/assets/images/icon-case.png" width="60px" /></br>Generate</a>';
+            $out.='</div>';
+
             foreach ($data['files'] as $file) {
-                $out.='<img class="success-icon" src="app/assets/images/success.png" /> ' . $file['file_dst_name'] . ", ";
+                $out.='<img class="success-icon" src="app/assets/images/success.png" /> ' . $file['dst_name'] . ", ";
             }
             
             $out.= "uploaded successfully.";
@@ -28,12 +34,12 @@ if (isset($_SESSION['success'])) {
 
         // CSV files as sheets
         $sheets = [];
-        
+
         // EACH FILE
         foreach ($data['files'] as $file) {
         
             // If PDF document
-            if ($file['file_type'] == 'application/pdf') {
+            if ($file['type'] == 'application/pdf') {
                 
                 $out.= "<h4>PDF preview</h4></br>";
                 
@@ -47,7 +53,7 @@ if (isset($_SESSION['success'])) {
                             $out.='<div class="img-top"></div>';
                             $out.='<div class="img-left"></div>';
                             
-                            $out.= '<img src="app/data/' . $file['file_jpg_preview'] . '" />';
+                            $out.= '<img src="app/data/' . $file['jpg_preview'] . '" />';
                         
                         $out.= '</div>';
                     
@@ -57,15 +63,16 @@ if (isset($_SESSION['success'])) {
                 
             } else { // If CSV file
             
-                // Convert CSV to array
-                require 'app/lib/csv_to_array.php';
-                
                 // CSV PREVIEW
-                $handle = file_get_contents($file['file_dst_pathname']);
+                $handle = file_get_contents($file['dst_pathname']);
+                
+                $csv = new lib\CsvToArray($handle);
+                
+                $csv = $csv->getCsvArray();
                 
                 $sheets[] = [
-                    'file_dst_name' => $file['file_dst_name'],
-                    'rows' => csv_to_array($handle)
+                    'dst_name' => $file['dst_name'],
+                    'rows' => $csv
                 ];
                     
             } // each file as sheet
@@ -79,7 +86,7 @@ if (isset($_SESSION['success'])) {
             // Files as sheets
             foreach($sheets as $sheet) {
                 
-                $out.='<h5 align="left">File: ' . $sheet['file_dst_name'] . '</h5>';
+                $out.='<h5 align="left">File: ' . $sheet['dst_name'] . '</h5>';
                 
                 $out.='<table class="stack">';
                 
@@ -124,11 +131,11 @@ if (isset($_SESSION['success'])) {
             } // each $sheets as $sheet
 
             $out.= '<a href="/" class="button">Upload again</a> | ';
-            $out.= '<a href="/generate" class="button">Generate</a>';
+            $out.= '<a href="/sample" class="button">Generate</a>';
         
         $out.= '</div>'; // /.csv-data
                 
-    $out.= '</div>'; // /-wrapper
+    $out.= '</div>'; // /.wrapper
     
     echo $out;
                 

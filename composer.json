@@ -16,5 +16,10 @@
         "org_heigl/ghostscript": "dev-master"
     },
     "license": "free",
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Numerate\\": "app"
+        }
+    }
 }

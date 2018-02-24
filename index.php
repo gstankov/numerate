@@ -3,10 +3,6 @@
 session_start();
 set_time_limit(300);
 
-use Slim\App;
-use Slim\Views\PhpRenderer;
-use Setasign\FPDI;
-
 /**
  * Step 1: Require the Slim Framework using Composer's autoloader
  *
@@ -14,6 +10,11 @@ use Setasign\FPDI;
  * PSR-4 autoloader.
  */
 require __DIR__ . '/vendor/autoload.php';
+
+use Slim\App;
+use Slim\Views\PhpRenderer;
+use Setasign\FPDI;
+use Numerate\lib;
 
 // Slim config
 $config = [
@@ -65,24 +66,21 @@ $app->get('/', function ($request, $response) {
     return $this->view->render($response, 'welcome.php');
     
 });
- 
+
 $app->get('/sample', function ($request, $response) {
     
     // Unset upload errors
     session_unset($_SESSION['error']);
     
-    // Convert CSV to PDF
-    require 'app/lib/csv_to_pdf.php';
-    // Convert CSV to array
-    require 'app/lib/csv_to_array.php';
-    
     // CSV
     $handle = file_get_contents('app/assets/samples/Sample_CSV.csv');
     
-    $csv = csv_to_array($handle);
+    $csv = new lib\CsvToArray($handle);
     
-    $pdf = csv_to_pdf('app/assets/samples/Sample_PDF.pdf', $csv);
+    // PDF output
+    $pdf = new lib\CsvToPdf('app/assets/samples/Sample_PDF.pdf', $csv);
     
+    // Headers
     $response = $response->withHeader('Content-type', 'application/pdf');
 	
 	return $response->write();
@@ -93,39 +91,35 @@ $app->post('/editor', function ($request, $response) {
 
     // App\Lib
     
-    // Upload CSV and PDF
-    require 'app/lib/csv_pdf_upload.php';
-    // Convert PDF to jpg
-    require 'app/lib/pdf_to_jpg.php';
-    
     // Upload files
-    $files = csv_pdf_upload();
+    $files = new lib\CsvPdfUpload();
     
-    // If error uploading
-    if (isset($files['error'])) {
+    $files = $files->getFiles();
+    
+    // No errors
+    if (!isset($files['error'])) {
+
+        // Set session error
+        $_SESSION['success'] = true;
+    
+        // Create PDF jpeg preview
+        $files = new lib\PdfToJpeg($files);
+        
+        $data['files'] = $files->getFiles();
+        
+        // Do not cache this response
+        $response = $response->withHeader("Cache-control", "no-store, no-cache, must-revalidate");
+        
+        // Return view
+        return $this->view->render($response, 'editor.php', $data);
+    
+    } else {
         
         // Set session error
         $_SESSION['error'] = $files['error'];
         
         // Redirect to welcome
         return $response->withRedirect('/');
-    
-    } else { // No errors
-    
-        // PDF jpg preview create
-        $files = pdf_to_jpg($files);
-        
-        // Set session error
-        $_SESSION['success'] = true;
-        
-        // Do not cache this response
-        $response = $response->withHeader("Cache-control", "no-store, no-cache, must-revalidate");
-        
-        // View data
-        $data['files'] = $files;
-        
-        // Return view
-        return $this->view->render($response, 'editor.php', $data);
     
     }
     
