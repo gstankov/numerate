@@ -176,20 +176,23 @@
         },
         {
             "name": "nikic/fast-route",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "b5f95749071c82a8e0f58586987627054400cdf6"
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/b5f95749071c82a8e0f58586987627054400cdf6",
-                "reference": "b5f95749071c82a8e0f58586987627054400cdf6",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|~5.7"
             },
             "type": "library",
             "autoload": {
@@ -215,7 +218,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2017-01-19T11:35:12+00:00"
+            "time": "2018-02-13T20:26:39+00:00"
         },
         {
             "name": "org_heigl/ghostscript",
@@ -223,18 +226,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heiglandreas/Org_Heigl_Ghostscript.git",
-                "reference": "b286cca4e17f3da6053aeda4488b93a5be257f06"
+                "reference": "2bcd115f047589c28243a66e6bbea993fc91da21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Ghostscript/zipball/b286cca4e17f3da6053aeda4488b93a5be257f06",
-                "reference": "b286cca4e17f3da6053aeda4488b93a5be257f06",
+                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Ghostscript/zipball/2bcd115f047589c28243a66e6bbea993fc91da21",
+                "reference": "2bcd115f047589c28243a66e6bbea993fc91da21",
                 "shasum": ""
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.1",
+                "mockery/mockery": "^1.0",
                 "phpdocumentor/phpdocumentor": "^2.9",
-                "phpunit/phpunit": "^5.3"
+                "phpunit/phpunit": "^5.5||^6.0||^7.0"
             },
             "type": "library",
             "autoload": {
@@ -253,7 +256,7 @@
                 }
             ],
             "description": "A PHP-Wrapper around the Ghostscript-CLI",
-            "time": "2017-10-18T04:56:34+00:00"
+            "time": "2018-02-22T08:37:21+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -261,12 +264,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "77e63f56742802485f0ac90f34da3dc3c3f775f6"
+                "reference": "9aaff1cb2f24988bd5d23a20f1578da118360525"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/77e63f56742802485f0ac90f34da3dc3c3f775f6",
-                "reference": "77e63f56742802485f0ac90f34da3dc3c3f775f6",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9aaff1cb2f24988bd5d23a20f1578da118360525",
+                "reference": "9aaff1cb2f24988bd5d23a20f1578da118360525",
                 "shasum": ""
             },
             "require": {
@@ -303,7 +306,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2018-01-21T10:38:34+00:00"
+            "time": "2018-02-09T15:35:40+00:00"
         },
         {
             "name": "psr/container",
@@ -585,12 +588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "3292735fe159ac2d084262db6acfa76a563bb8dc"
+                "reference": "d0d9655a66c61e5fd25fdbdc2fc80a6e37af469c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/3292735fe159ac2d084262db6acfa76a563bb8dc",
-                "reference": "3292735fe159ac2d084262db6acfa76a563bb8dc",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/d0d9655a66c61e5fd25fdbdc2fc80a6e37af469c",
+                "reference": "d0d9655a66c61e5fd25fdbdc2fc80a6e37af469c",
                 "shasum": ""
             },
             "require": {
@@ -648,7 +651,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2017-12-23T10:33:51+00:00"
+            "time": "2018-02-14T16:32:04+00:00"
         },
         {
             "name": "verot/class.upload.php",
@@ -656,12 +659,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/verot/class.upload.php.git",
-                "reference": "d63b7568513edb5947ddd77ff082e6258796244b"
+                "reference": "54a225d01a4b658fe05852ee5a3b7b3829467a2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/verot/class.upload.php/zipball/d63b7568513edb5947ddd77ff082e6258796244b",
-                "reference": "d63b7568513edb5947ddd77ff082e6258796244b",
+                "url": "https://api.github.com/repos/verot/class.upload.php/zipball/54a225d01a4b658fe05852ee5a3b7b3829467a2a",
+                "reference": "54a225d01a4b658fe05852ee5a3b7b3829467a2a",
                 "shasum": ""
             },
             "require": {
@@ -675,7 +678,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPLv2"
+                "GPL-2.0-only"
             ],
             "authors": [
                 {
@@ -689,7 +692,7 @@
                 "gd",
                 "upload"
             ],
-            "time": "2018-01-09T22:13:42+00:00"
+            "time": "2018-02-11T18:40:29+00:00"
         },
         {
             "name": "zurb/foundation",
@@ -697,12 +700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zurb/foundation-sites.git",
-                "reference": "897a787acfc8241d69d5ffbd0756cb91dbfdea21"
+                "reference": "bd9821c233e873f5f142e2038c6035126a22a39d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zurb/foundation-sites/zipball/897a787acfc8241d69d5ffbd0756cb91dbfdea21",
-                "reference": "897a787acfc8241d69d5ffbd0756cb91dbfdea21",
+                "url": "https://api.github.com/repos/zurb/foundation-sites/zipball/bd9821c233e873f5f142e2038c6035126a22a39d",
+                "reference": "bd9821c233e873f5f142e2038c6035126a22a39d",
                 "shasum": ""
             },
             "type": "library",
@@ -728,7 +731,7 @@
                 "sass",
                 "scss"
             ],
-            "time": "2018-01-13T12:18:47+00:00"
+            "time": "2018-02-11T23:00:17+00:00"
         }
     ],
     "packages-dev": [],
