@@ -25,7 +25,7 @@ if (isset($_SESSION['success'])) {
                 $out.="<label>CSV file:</label>";
                 
                 $out.= '<select>';
-                    $out.= '<option>Value</option>';
+                $out.= '<option>Value</option>';
                 $out.= '</select>';
                 
                 $out.="<label>CSV column:</label>";
@@ -43,6 +43,8 @@ if (isset($_SESSION['success'])) {
                     $out.= '<input class="switch-input" id="tinySwitch" type="checkbox" name="exampleSwitch" checked>';
                     $out.= '<label class="switch-paddle" for="tinySwitch">';
                         $out.= '<span class="show-for-sr">Tiny Sandwiches Enabled</span>';
+                        $out.= '<span class="switch-active" aria-hidden="true">On</span>';
+                        $out.= '<span class="switch-inactive" aria-hidden="true">Off</span>';
                     $out.= '</label>';
                 $out.= '</div>';
                 
@@ -51,8 +53,8 @@ if (isset($_SESSION['success'])) {
                     $out.= '<input class="switch-input" id="tinySwitch2" type="checkbox" name="exampleSwitch2" checked>';
                     $out.= '<label class="switch-paddle" for="tinySwitch2">';
                         $out.= '<span class="show-for-sr">Tiny Sandwiches Enabled</span>';
-                        $out.= '<span class="switch-active" aria-hidden="true">Yes</span>';
-                        $out.= '<span class="switch-inactive" aria-hidden="true">No</span>';
+                        $out.= '<span class="switch-active" aria-hidden="true">On</span>';
+                        $out.= '<span class="switch-inactive" aria-hidden="true">Off</span>';
                     $out.= '</label>';
                 $out.= '</div>';
                 
@@ -91,10 +93,10 @@ if (isset($_SESSION['success'])) {
                 // If PDF document
                 if ($file['type'] == 'application/pdf') {
                     
-                    //$out.= "<h4>PDF preview</h4></br>";
-                    
                     // PDF PREVIEW
                     $out.= '<div class="pdf-preview">';
+                    
+                        $out.= '<div class="loading">Loading PDF preview...</br><img src="app/assets/images/spinner.gif" /></div>';
                     
                         $out.= '<div class="img-wrapper">';
                         
