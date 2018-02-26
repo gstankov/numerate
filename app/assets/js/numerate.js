@@ -1,7 +1,8 @@
-/*global $*/
+/* global $ */
 
 $('document').ready(function() {
     
+    // Plugin
     $('.img-wrapper').imagesLoaded().always( function( instance ) {
         
                 console.log('all images loaded');

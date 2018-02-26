@@ -6,4 +6,8 @@ use c9;
 select @@hostname;
 exit
 
-modified setasign fpdf bridge
+modified setasign/fpdi_bridge (if ! 'TCPDF' extend tFPDF instead of FPDF).
+
+copied font
+
+pdf info fpdf
