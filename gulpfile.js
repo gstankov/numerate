@@ -7,8 +7,11 @@ var replace     = require('gulp-replace');  // Replace
 // Default task
 gulp.task('default', function() {
     
-    var jquery = gulp.src('vendor/components/jquery/*')
+    var jquery = gulp.src('vendor/components/jquery/jquery.min.js')
         .pipe(gulp.dest('app/assets/js/jquery'));
+        
+    var jqueryUi = gulp.src('vendor/components/jqueryui/jquery-ui.min.js')
+        .pipe(gulp.dest('app/assets/js/jqueryui'));
         
     var zurbJs = gulp.src('vendor/zurb/foundation/dist/js/*')
         .pipe(gulp.dest('app/assets/js/zurb'));
@@ -32,6 +35,7 @@ gulp.task('default', function() {
         zurbCss,
         imagesLoaded,
         pdfFontCopy,
+        jqueryUi,
         extend_tFPDF
     );
 

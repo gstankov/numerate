@@ -20,18 +20,28 @@ class EditorController
         // Upload files
         $files = new lib\CsvPdfUpload();
         
+        // Create file properties
         $files = $files->getFiles();
         
         // No errors
         if (!isset($files['error'])) {
     
-            // Set session error
-            $_SESSION['success'] = true;
-        
             // Create PDF jpeg preview
             $files = new lib\PdfToJpeg($files);
             
-            $data['files'] = $files->getFiles();
+            // Add PDF jpeg preview property
+            $files = $files->getJpeg();
+            
+            // Add PDF info property
+            $files = new lib\PdfInfo($files);
+
+            // Gets PDF info
+            $data['files'] = $files->getInfo();
+
+            // Response
+            
+            // Set session error
+            $_SESSION['success'] = true;
             
             // Do not cache this response
             $response = $response->withHeader("Cache-control", "no-store, no-cache, must-revalidate");

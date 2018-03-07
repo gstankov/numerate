@@ -13,7 +13,8 @@
         "slim/php-view": "dev-master",
         "zurb/foundation": "dev-master",
         "components/jquery": "dev-master",
-        "org_heigl/ghostscript": "dev-master"
+        "org_heigl/ghostscript": "dev-master",
+        "components/jqueryui": "dev-master"
     },
     "license": "free",
     "minimum-stability": "dev",

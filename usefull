@@ -11,3 +11,8 @@ modified setasign/fpdi_bridge (if ! 'TCPDF' extend tFPDF instead of FPDF).
 copied font
 
 pdf info fpdf
+
+git clone https://github.com/gstankov/numerate
+numerate/composer install
+npm install
+gulp

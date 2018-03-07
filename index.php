@@ -19,7 +19,7 @@ $container = new \Slim\Container;
 
 $container['settings']['displayErrorDetails'] = true;
 
-//define DI in container
+// Define DI in container
 $container['view'] = function() {
     return new PhpRenderer('app/templates/');
 };

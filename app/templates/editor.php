@@ -16,29 +16,29 @@ if (isset($_SESSION['success'])) {
         
             $out.='<div class="menu-left float-left">';
             
-                $out.= '<a href="/"><img src="app/assets/images/icon-case-upload.png" width="60px" /></br>Upload</br></br></a>';
+                $out.= '<a href="/"><img src="app/assets/images/icon-case-upload.png" width="60px" /></br>Try again</br></br></a>';
+            
+                $out.='<p>PDF file info:</p>';
                 
-                $out.= '<p>';
-                    $out.= 'Select CSV file and column to place stuff:';
-                $out.= '</p>';
+                foreach ($data['files'] as $file) {
+
+                    // If PDF document
+                    if ($file['type'] == 'application/pdf') {
+                        $out.= '<b>Name</b>:</br> <span title="' . $file['dst_name'] . '">' . $file['dst_name'] . '</span></br>';
+                        $out.= '<b>Type</b>:</br>' . $file['type'] . '</br>';
+                        $out.= '<b>Size</b>:</br>' . $file['src_size'] . '</br>';
+                        $out.= '<b>Dimensions</b>:</br>' . round($file['info']['size']['w'], 2) . 'x' . round($file['info']['size']['h'], 2) . 'mm';
+                    }
+                    
+                }
+
+            $out.='</div>';
+            
+            $out.='<div class="menu-right float-right">';
+            
+                $out.='<a href="/generate"><img src="app/assets/images/icon-generate.png" width="60px" /></br>Generate</br></br></a>';
                 
-                $out.="<label>CSV file:</label>";
-                
-                $out.= '<select>';
-                $out.= '<option>Value</option>';
-                $out.= '</select>';
-                
-                $out.="<label>CSV column:</label>";
-                
-                $out.= '<select>';
-                    $out.= '<option>Value</option>';
-                $out.= '</select>';
-                
-                $out.= '<a href="/sample" class="button small">Place QR code</a></br>';
-                $out.= '<a href="/sample" class="button small">Place Barcode</a></br>';
-                $out.= '<a href="/sample" class="button small">Place Text</a></br>';
-                
-                $out.="<label>Add filename and info</label>";
+                $out.="<label>Place filenames</label>";
                 $out.= '<div class="switch tiny">';
                     $out.= '<input class="switch-input" id="tinySwitch" type="checkbox" name="exampleSwitch" checked>';
                     $out.= '<label class="switch-paddle" for="tinySwitch">';
@@ -48,7 +48,7 @@ if (isset($_SESSION['success'])) {
                     $out.= '</label>';
                 $out.= '</div>';
                 
-                $out.="<label>Add report page</label>";
+                $out.="<label>Report page</label>";
                 $out.= '<div class="switch tiny">';
                     $out.= '<input class="switch-input" id="tinySwitch2" type="checkbox" name="exampleSwitch2" checked>';
                     $out.= '<label class="switch-paddle" for="tinySwitch2">';
@@ -57,24 +57,6 @@ if (isset($_SESSION['success'])) {
                         $out.= '<span class="switch-inactive" aria-hidden="true">Off</span>';
                     $out.= '</label>';
                 $out.= '</div>';
-                
-            $out.='</div>';
-            
-            $out.='<div class="menu-right float-right">';
-            
-                $out.='<a href="/generate"><img src="app/assets/images/icon-generate.png" width="60px" /></br>Generate</br></br></a>';
-                $out.='<p>PDF file info</p>';
-                
-                foreach ($data['files'] as $file) {
-
-                    // If PDF document
-                    if ($file['type'] == 'application/pdf') {
-                        $out.= '<b>Name</b>: <span title="' . $file['dst_name'] . '">' . $file['dst_name'] . '</span></br>';
-                        $out.= '<b>Type</b>: ' . $file['type'] . '</br>';
-                        $out.= '<b>Size</b>: ' . $file['src_size'] . '</br>';
-                    }
-                    
-                }
                 
             $out.='</div>';
             
@@ -96,8 +78,6 @@ if (isset($_SESSION['success'])) {
                     // PDF PREVIEW
                     $out.= '<div class="pdf-preview">';
                     
-                        $out.= '<div class="loading">Loading PDF preview...</br><img src="app/assets/images/spinner.gif" /></div>';
-                    
                         $out.= '<div class="img-wrapper">';
                         
                             $out.= '<div class="img-wrapper-background">';
@@ -110,6 +90,8 @@ if (isset($_SESSION['success'])) {
                             $out.= '</div>';
                         
                         $out.= '</div>';
+                        
+                        $out.= '<div class="loading">Loading PDF preview...</br><img src="app/assets/images/spinner.gif" /></div>';
                         
                     $out.= '</div>';
                     
@@ -130,15 +112,15 @@ if (isset($_SESSION['success'])) {
                 } // each file as sheet
                 
             } // foreach $data['files'] as $file
-            
-            //$out.= '<h4>CSV data</h4>';
     
             $out.= '<div class="csv-data">';
                 
                 // Files as sheets
                 foreach($sheets as $sheet) {
                     
-                    $out.='<h5 align="left" style="clear: both;">File: ' . $sheet['dst_name'] . '</h5>';
+                    $out.='<h4 align="left" style="clear: both;">File: ' . $sheet['dst_name'] . '</h4>';
+                    
+                    $out.= '<h6 align="left" class="subheader">Drag and drop column header options to PDF preview. <em>(if data looks garbled might be some problem with the CSV parser).</em></h6>';
                     
                     $out.='<table class="stack">';
                     
@@ -148,12 +130,13 @@ if (isset($_SESSION['success'])) {
                             
                             // If first row, it's header
                             if ($i == 0) {
-                                    
+                                
                                 $out.='<thead>';
                                 
                                     $out.='<tr>';
                                         foreach ($row as $column) {
-                                            $out.= '<th>' . $column . '</th>';
+                                            $qr = new lib\StringToQr($column);
+                                            $out.= '<th align="center">' . $column . '</br><img src="app/data/' .$qr->getQr(). '" class="qr-code" width="50px;" /></th>';
                                         }
                                     $out.= '</tr>';
                                     
@@ -166,7 +149,7 @@ if (isset($_SESSION['success'])) {
                                 
                                 $out.='<tr>';
                                     foreach ($row as $column) {
-                                        $out.= '<td align="left">' . $column . '</td>';
+                                        $out.= '<td align="center">' . $column . '</td>';
                                     }
                                 $out.= '</tr>';
                                     

@@ -50,7 +50,7 @@ class PdfToJpeg
 	
 	}
 	
-	public function getFiles() {
+	public function getJpeg() {
 		
 		return $this->files;
 		
